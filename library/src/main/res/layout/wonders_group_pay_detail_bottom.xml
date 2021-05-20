@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/wonders_padding_8dp">
+
+    <TextView
+        android:id="@+id/tvPayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/wonders_margin_10dp"
+        android:text=""
+        android:textColor="@color/wonders_rgb_color_666666"
+        android:textSize="@dimen/wonders_text_size_14sp" />
+
+    <TextView
+        android:id="@+id/tvMoneyNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/wonders_rgb_color_00b76a"
+        android:textSize="@dimen/wonders_text_size_16sp" />
+
+    <TextView
+        android:id="@+id/tvTextYuan"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wonders_text_yuan"
+        android:textColor="@color/wonders_rgb_color_666666"
+        android:textSize="@dimen/wonders_text_size_14sp" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tvPayMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/wonders_margin_10dp"
+        android:background="@drawable/wonders_group_pay_detail_selector"
+        android:enabled="true"
+        android:gravity="center"
+        android:text="@string/wonders_pay_money"
+        android:textColor="@color/wonders_rgb_color_ffffff" />
+</LinearLayout>
