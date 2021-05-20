@@ -20,6 +20,7 @@ import com.wondersgroup.android.sdk.constants.SpKey;
 import com.wondersgroup.android.sdk.constants.TranCode;
 import com.wondersgroup.android.sdk.entity.EleCardEntity;
 import com.wondersgroup.android.sdk.entity.Maps;
+import com.wondersgroup.android.sdk.entity.WondersOutParams;
 import com.wondersgroup.android.sdk.net.RetrofitHelper;
 import com.wondersgroup.android.sdk.net.callback.ApiSubscriber;
 import com.wondersgroup.android.sdk.net.service.BusinessService;
@@ -68,7 +69,13 @@ public class ElectronicSocialSecurityCard {
 //
 //        getSign(map, s -> startSdk(activity, idNum, name, s));
         // TODO: 2021/5/6  外部修改参数获取记录
-        startSdk(activity, idNum, name, WondersImp.getExternParams().getSign());
+        final String cardNum = SpUtil.getInstance().getString(SpKey.CARD_NUM, "");
+        WondersOutParams outParams = new WondersOutParams();
+        outParams.setType("1");
+        outParams.setName(name);
+        outParams.setSocialSecurityNum(cardNum);
+
+        startSdk(activity, idNum, name, WondersImp.getExternParams(outParams).getSign());
     }
 
     /**
@@ -115,7 +122,10 @@ public class ElectronicSocialSecurityCard {
 
         HashMap<String, String> map = Maps.newHashMapWithExpectedSize(6);
 //        map.put(MapKey.CHANNEL_NO, WondersSdk.getChannelNo());
-        map.put(MapKey.CHANNEL_NO, WondersImp.getExternParams().getChannelNo());
+        final String cardNum = SpUtil.getInstance().getString(SpKey.CARD_NUM, "");
+        WondersOutParams outParams = new WondersOutParams();
+        outParams.setType("0");
+        map.put(MapKey.CHANNEL_NO, WondersImp.getExternParams(outParams).getChannelNo());
         map.put(MapKey.AAC002, idNum);
         map.put(MapKey.AAC003, name);
         //map.put(MapKey.AAB301, "330500");

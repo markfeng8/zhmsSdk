@@ -31,6 +31,7 @@ import com.wondersgroup.android.sdk.entity.Cy0007Entity;
 import com.wondersgroup.android.sdk.entity.EleCardEntity;
 import com.wondersgroup.android.sdk.entity.EleCardTokenEntity;
 import com.wondersgroup.android.sdk.entity.PayParamEntity;
+import com.wondersgroup.android.sdk.entity.WondersOutParams;
 import com.wondersgroup.android.sdk.ui.leavehospital.contract.LeaveHospitalContract;
 import com.wondersgroup.android.sdk.ui.leavehospital.presenter.LeaveHospitalPresenter;
 import com.wondersgroup.android.sdk.ui.leavehosresult.LeaveHosResultActivity;
@@ -241,7 +242,12 @@ public class LeaveHospitalActivity extends MvpBaseActivity<LeaveHospitalContract
 //                s -> startSdk(idNum, name, s)
 //        );
         // TODO: 2021/5/6  外部修改参数获取记录
-        startSdk(idNum, name, WondersImp.getExternParams().getSign());
+        final String cardNum = SpUtil.getInstance().getString(SpKey.CARD_NUM, "");
+        WondersOutParams outParams = new WondersOutParams();
+        outParams.setType("2");
+        outParams.setName(name);
+        outParams.setSocialSecurityNum(cardNum);
+        startSdk(idNum, name, WondersImp.getExternParams(outParams).getSign());
     }
 
     /**

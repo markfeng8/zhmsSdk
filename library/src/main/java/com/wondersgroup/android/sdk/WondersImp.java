@@ -3,6 +3,7 @@ package com.wondersgroup.android.sdk;
 import android.text.TextUtils;
 
 import com.wondersgroup.android.sdk.entity.WondersExternParams;
+import com.wondersgroup.android.sdk.entity.WondersOutParams;
 
 public class WondersImp {
 
@@ -15,7 +16,7 @@ public class WondersImp {
     private static WondersExternParams wondersExternParams = new WondersExternParams();
 
     public interface WondersParamsImp {
-        WondersExternParams getExternParams();
+        WondersExternParams getExternParams(WondersOutParams outParams);
     }
 
     public static void setWondersExternParamsImp(WondersParamsImp wondersParamsImp) {
@@ -27,9 +28,9 @@ public class WondersImp {
      *
      * @return
      */
-    public static WondersExternParams getExternParams() {
+    public static WondersExternParams getExternParams(WondersOutParams outParams) {
         if (mWondersParamsImp != null) {
-            WondersExternParams params = mWondersParamsImp.getExternParams();
+            WondersExternParams params = mWondersParamsImp.getExternParams(outParams);
             if (params != null) {
                 if (!TextUtils.isEmpty(params.getChannelNo())) {
                     wondersExternParams.setChannelNo(params.getChannelNo());
