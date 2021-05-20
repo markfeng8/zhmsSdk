@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -129,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
 
         WondersImp.setWondersExternParamsImp(new WondersImp.WondersParamsImp() {
             @Override
-            public WondersExternParams getExternParams(WondersOutParams outParams) {
+            public WondersExternParams getExternParams(WondersOutParams outParams,
+                                                       WondersImp.WondersSignImp signImp) {
                 LogUtil.i("WondersOutParams", outParams.toString());
                 WondersExternParams params = new WondersExternParams();
                 if ("0".equals(outParams.getType())) {//获取渠道信息、渠道号
@@ -137,12 +139,16 @@ public class MainActivity extends AppCompatActivity {
                     params.setQDCODE("渠道信息");
                 } else if ("1".equals(outParams.getType())) {//申领社保卡sign
                     params.setSign("申领社保卡sign");
+                    signImp.getSignParams(params);
                 } else if ("2".equals(outParams.getType())) {//支付验证sign
                     params.setSign("支付验证sign");
+                    signImp.getSignParams(params);
                 }
                 return params;
             }
         });
+
+
     }
 
     private void initData() {

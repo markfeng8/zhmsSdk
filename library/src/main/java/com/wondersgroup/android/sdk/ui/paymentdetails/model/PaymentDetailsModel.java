@@ -250,7 +250,7 @@ public class PaymentDetailsModel implements PaymentDetailsContract.IModel {
         //map.put(MapKey.QDCODE, "01");
         WondersOutParams outParams = new WondersOutParams();
         outParams.setType("0");
-        map.put(MapKey.QDCODE, WondersImp.getExternParams(outParams).getQDCODE());
+        map.put(MapKey.QDCODE, WondersImp.getExternParams(outParams,null).getQDCODE());
         map.put(MapKey._AAC002, mIdNum);
         map.put(MapKey._AAC003, mName);
 
@@ -260,7 +260,7 @@ public class PaymentDetailsModel implements PaymentDetailsContract.IModel {
         // TODO: 2021/5/6  外部修改参数获取记录
         //map.put(MapKey.CHANNEL_NO, "01");
 
-        map.put(MapKey.CHANNEL_NO, WondersImp.getExternParams(outParams).getChannelNo());
+        map.put(MapKey.CHANNEL_NO, WondersImp.getExternParams(outParams,null).getChannelNo());
         map.put(MapKey.SIGN_NO, signNo);
 
         map.put(MapKey.VERSION, OrgConfig.GLOBAL_API_VERSION);

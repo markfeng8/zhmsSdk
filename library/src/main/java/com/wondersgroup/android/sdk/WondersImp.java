@@ -16,21 +16,26 @@ public class WondersImp {
     private static WondersExternParams wondersExternParams = new WondersExternParams();
 
     public interface WondersParamsImp {
-        WondersExternParams getExternParams(WondersOutParams outParams);
+        WondersExternParams getExternParams(WondersOutParams outParams, WondersSignImp signImp);
+    }
+
+    public interface WondersSignImp {
+        void getSignParams(WondersExternParams wondersExternParams);
     }
 
     public static void setWondersExternParamsImp(WondersParamsImp wondersParamsImp) {
         mWondersParamsImp = wondersParamsImp;
     }
 
+
     /**
      * 获取接口实现后返回的参数，未实现接口时，返回默认参数
      *
      * @return
      */
-    public static WondersExternParams getExternParams(WondersOutParams outParams) {
+    public static WondersExternParams getExternParams(WondersOutParams outParams, WondersSignImp signImp) {
         if (mWondersParamsImp != null) {
-            WondersExternParams params = mWondersParamsImp.getExternParams(outParams);
+            WondersExternParams params = mWondersParamsImp.getExternParams(outParams, signImp);
             if (params != null) {
                 if (!TextUtils.isEmpty(params.getChannelNo())) {
                     wondersExternParams.setChannelNo(params.getChannelNo());

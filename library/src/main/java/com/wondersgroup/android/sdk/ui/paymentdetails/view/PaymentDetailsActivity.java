@@ -38,6 +38,7 @@ import com.wondersgroup.android.sdk.entity.LockOrderEntity;
 import com.wondersgroup.android.sdk.entity.OrderDetailsEntity;
 import com.wondersgroup.android.sdk.entity.PayParamEntity;
 import com.wondersgroup.android.sdk.entity.SettleEntity;
+import com.wondersgroup.android.sdk.entity.WondersExternParams;
 import com.wondersgroup.android.sdk.entity.WondersOutParams;
 import com.wondersgroup.android.sdk.ui.paymentdetails.contract.PaymentDetailsContract;
 import com.wondersgroup.android.sdk.ui.paymentdetails.presenter.PaymentDetailsPresenter;
@@ -711,11 +712,19 @@ public class PaymentDetailsActivity extends MvpBaseActivity<PaymentDetailsContra
 //        );
         // TODO: 2021/5/6 外部修改参数获取记录
         final String cardNum = SpUtil.getInstance().getString(SpKey.CARD_NUM, "");
+        final String signNo = SpUtil.getInstance().getString(SpKey.SIGN_NO, "");
         WondersOutParams outParams = new WondersOutParams();
         outParams.setType("2");
         outParams.setName(name);
         outParams.setSocialSecurityNum(cardNum);
-        startSdk(idNum, name, WondersImp.getExternParams(outParams).getSign());
+        outParams.setSignNo(signNo);
+        WondersImp.getExternParams(outParams, new WondersImp.WondersSignImp() {
+            @Override
+            public void getSignParams(WondersExternParams wondersExternParams) {
+                startSdk(idNum, name, wondersExternParams.getSign());
+            }
+        });
+
     }
 
     /**
