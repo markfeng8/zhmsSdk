@@ -5,6 +5,11 @@ import android.text.TextUtils;
 import com.wondersgroup.android.sdk.entity.WondersExternParams;
 import com.wondersgroup.android.sdk.entity.WondersOutParams;
 
+/**
+ * 提供对载体输出参数，和载体对sdk输入参数的回调
+ * WondersExternParams 外部入参实体类
+ * WondersOutParams    SDK对外出参实体类
+ */
 public class WondersImp {
 
     private static final String TAG = "WondersImp";
@@ -26,7 +31,6 @@ public class WondersImp {
     public static void setWondersExternParamsImp(WondersParamsImp wondersParamsImp) {
         mWondersParamsImp = wondersParamsImp;
     }
-
 
     /**
      * 获取接口实现后返回的参数，未实现接口时，返回默认参数

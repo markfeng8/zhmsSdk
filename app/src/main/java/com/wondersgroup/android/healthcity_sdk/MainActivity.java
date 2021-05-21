@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -143,6 +142,11 @@ public class MainActivity extends AppCompatActivity {
                 } else if ("2".equals(outParams.getType())) {//支付验证sign
                     params.setSign("支付验证sign");
                     signImp.getSignParams(params);
+                } else if ("3".equals(outParams.getType())) {//万达SDK申领社保卡后，将省卡管返回的数据输出（包含签发号 ）
+                    //省卡管sdk回调返回的json字符串
+                    String result = outParams.getZjEsscSDKResult();
+                    //如果有涉及到签发号的逻辑，解析json字符串后，最好判断一下签发号是否为空
+
                 }
                 return params;
             }

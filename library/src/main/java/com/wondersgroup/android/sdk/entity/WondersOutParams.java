@@ -7,11 +7,16 @@ package com.wondersgroup.android.sdk.entity;
  */
 public class WondersOutParams {
 
-    private String type;//0：获取渠道信息，渠道号  1：申领社保卡  2：支付验证
-
+    // 0：获取渠道信息，渠道号
+    // 1：申领社保卡
+    // 2：支付验证
+    // 3:万达SDK申领社保卡后，将省卡管返回的数据输出（包含签发号 ）
+    private String type;
     private String socialSecurityNum;//社保卡号
     private String name;//姓名
     private String signNo;//签发号
+
+    private String zjEsscSDKResult;//申领社保卡的时候，sdk返回result
 
     public String getType() {
         return type;
@@ -43,5 +48,13 @@ public class WondersOutParams {
 
     public void setSignNo(String signNo) {
         this.signNo = signNo;
+    }
+
+    public String getZjEsscSDKResult() {
+        return zjEsscSDKResult;
+    }
+
+    public void setZjEsscSDKResult(String zjEsscSDKResult) {
+        this.zjEsscSDKResult = zjEsscSDKResult;
     }
 }

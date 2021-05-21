@@ -131,7 +131,7 @@ public class ElectronicSocialSecurityCard {
         final String cardNum = SpUtil.getInstance().getString(SpKey.CARD_NUM, "");
         WondersOutParams outParams = new WondersOutParams();
         outParams.setType("0");
-        map.put(MapKey.CHANNEL_NO, WondersImp.getExternParams(outParams,null).getChannelNo());
+        map.put(MapKey.CHANNEL_NO, WondersImp.getExternParams(outParams, null).getChannelNo());
         map.put(MapKey.AAC002, idNum);
         map.put(MapKey.AAC003, name);
         //map.put(MapKey.AAB301, "330500");
@@ -154,11 +154,11 @@ public class ElectronicSocialSecurityCard {
             此时SDK返回006说明已经开通，此时状态同001，需要APP端通知后台更新状态*/
                 // 电子社保卡申领完成（一级签发）
             case "001":
-                parseResult(eleCardEntity);
+                parseResult(eleCardEntity, data);
                 break;
             // 直接验密签发(指在其他渠道已领取，然后在当前渠道签发)，和 001 一样需要上传 signNo
             case "002":
-                parseResult(eleCardEntity);
+                parseResult(eleCardEntity, data);
                 break;
             // 解除绑定完成
             case "003":
@@ -166,14 +166,22 @@ public class ElectronicSocialSecurityCard {
                 break;
             // 开通缴费结算功能(二级签发)
             case "005":
-                parseResult(eleCardEntity);
+                parseResult(eleCardEntity, data);
                 break;
             default:
                 break;
         }
     }
 
-    private void parseResult(EleCardEntity eleCardEntity) {
+
+    private void parseResult(EleCardEntity eleCardEntity, String result) {
+
+        //对实现了WondersParamsImp接口的回调，输出result（包含签发号）
+        WondersOutParams outParams = new WondersOutParams();
+        outParams.setType("3");
+        outParams.setZjEsscSDKResult(result);
+        WondersImp.getExternParams(outParams, null);
+
         String signNo = eleCardEntity.getSignNo();
         String aab301 = eleCardEntity.getAab301();
         LogUtil.i(TAG, "signNo===" + signNo + ",aab301===" + aab301);
