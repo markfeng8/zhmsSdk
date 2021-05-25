@@ -458,13 +458,6 @@ public class PaymentDetailsActivity extends MvpBaseActivity<PaymentDetailsContra
         PayParamEntity paramEntity = PayParamEntity.from(
                 body, mOrgName, mPayPlatTradeNo, mPaymentType, mFeeCashTotal
         );
-        //延迟4秒设置为true。吊起支付，会直接走onResume
-        getWindow().getDecorView().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                isCrashPayBack = true;
-            }
-        }, 4000);
 
         // 发起万达统一支付，支付现金部分
         mCompositeDisposable.add(
@@ -477,37 +470,13 @@ public class PaymentDetailsActivity extends MvpBaseActivity<PaymentDetailsContra
                                 // 支付成功后发起正式结算
                                 onCashPaySuccess();
                             }
-                            isCrashPayBack = false;
-                            LogUtil.i("isCrashPayBack", "WdPayBack:" + isCrashPayBack);
                         }, throwable -> WToastUtil.show(throwable.getMessage()))
         );
     }
 
-    //用来判断 调起三方支付完成后，回到该界面，有没有走到支付回调 WdCommonPayUtils
-    private boolean isCrashPayBack = false;
-
     @Override
     protected void onResume() {
         super.onResume();
-        //现金部分支付之后，如果支付没有给任何回调，会出现医保结算逻辑走不到onCashPaySuccess
-        //所以此处增加  现金结算结束后回到该界面的时候，自动走一次医保结算
-        //通过标志位判断是否是 现在结算后，回到该界面的。（从支付宝或者微信支付界面回来的）
-        getWindow().getDecorView().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        LogUtil.i("isCrashPayBack", "onResume:" + isCrashPayBack);
-                        if (isCrashPayBack) {
-                            onCashPaySuccess();
-                            isCrashPayBack = false;
-                        }
-                    }
-                });
-            }
-        }, 2000);
-
     }
 
     private void onCashPaySuccess() {
