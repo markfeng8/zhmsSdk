@@ -458,7 +458,14 @@ public class PaymentDetailsActivity extends MvpBaseActivity<PaymentDetailsContra
         PayParamEntity paramEntity = PayParamEntity.from(
                 body, mOrgName, mPayPlatTradeNo, mPaymentType, mFeeCashTotal
         );
-        isCrashPayBack = true;
+        //延迟4秒设置为true。吊起支付，会直接走onResume
+        getWindow().getDecorView().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                isCrashPayBack = true;
+            }
+        }, 4000);
+
         // 发起万达统一支付，支付现金部分
         mCompositeDisposable.add(
                 WdCommonPayUtils.toPay(this, paramEntity)
