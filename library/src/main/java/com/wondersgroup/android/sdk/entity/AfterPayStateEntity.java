@@ -101,4 +101,19 @@ public class AfterPayStateEntity extends BaseEntity implements Serializable {
     public void setFee_date(String fee_date) {
         this.fee_date = fee_date;
     }
+
+    @Override
+    public String toString() {
+        return "AfterPayStateEntity{" +
+                "signing_status='" + signing_status + '\'' +
+                ", one_payment_status='" + one_payment_status + '\'' +
+                ", ct_date='" + ct_date + '\'' +
+                ", fee_total='" + fee_total + '\'' +
+                ", org_name='" + org_name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", org_code='" + org_code + '\'' +
+                ", fee_date='" + fee_date + '\'' +
+                ", hi_code='" + hi_code + '\'' +
+                '}';
+    }
 }
