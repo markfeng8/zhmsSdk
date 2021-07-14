@@ -259,6 +259,7 @@ public class AfterPayHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
              * 2.如果开通了医保移动支付，继续判断医后付签约状态
              */
             String signingStatus = SpUtil.getInstance().getString(SpKey.SIGNING_STATUS, "");
+            LogUtil.i(TAG, "signingStatus:" + signingStatus);
             if (!"01".equals(signingStatus)) {
                 WToastUtil.show("您未开通医后付，请先开通医后付！");
                 return;
@@ -287,7 +288,7 @@ public class AfterPayHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private void requestYd0003() {
             String mobPayStatus = SpUtil.getInstance().getString(SpKey.ELE_CARD_STATUS, "");
             if ("01".equals(mobPayStatus)) {
-                PaymentDetailsActivity.actionStart(mContext, orgCode, orgName, hiCode,false);
+                PaymentDetailsActivity.actionStart(mContext, orgCode, orgName, hiCode, false);
             } else {
                 WToastUtil.show(mContext.getString(R.string.wonders_group_electronic_card_closed));
             }
