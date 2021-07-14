@@ -156,7 +156,7 @@ public class AfterPayHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private TextView tvHospitalName;
         private TextView tvTreatName;
         private TextView tvIdNum;
-        private TextView tvAfterPayState;
+        private TextView tv_afterpaystate;
         private TextView tvMobilePayState;
         private TextView tvToPay;
         private LinearLayout llToPayFee;
@@ -171,7 +171,7 @@ public class AfterPayHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tvHospitalName = itemView.findViewById(R.id.tvHospitalName);
             tvTreatName = itemView.findViewById(R.id.tvTreatName);
             tvIdNum = itemView.findViewById(R.id.tvIdNum);
-            tvAfterPayState = itemView.findViewById(R.id.tvAfterPayState);
+            tv_afterpaystate = itemView.findViewById(R.id.tv_afterpaystate);
             tvMobilePayState = itemView.findViewById(R.id.tvMobilePayState);
             tvToPay = itemView.findViewById(R.id.tvToPay);
             llToPayFee = itemView.findViewById(R.id.llToPayFee);
@@ -202,7 +202,7 @@ public class AfterPayHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             mCompositeDisposable.add(
                     // 点击去开通医后付(前提是开通医保移动支付)
-                    RxView.clicks(tvAfterPayState)
+                    RxView.clicks(tv_afterpaystate)
                             .throttleFirst(1, TimeUnit.SECONDS)
                             .subscribe(s -> openAfterPay())
             );
@@ -357,12 +357,12 @@ public class AfterPayHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
          */
         private void setAfterPayState(boolean enable) {
             if (enable) {
-                tvAfterPayState.setText(mContext.getString(R.string.wonders_to_open_after_pay));
-                tvAfterPayState.setEnabled(true);
-                tvAfterPayState.setCompoundDrawables(null, null, null, null);
+                tv_afterpaystate.setText(mContext.getString(R.string.wonders_to_open_after_pay));
+                tv_afterpaystate.setEnabled(true);
+                tv_afterpaystate.setCompoundDrawables(null, null, null, null);
             } else {
-                tvAfterPayState.setText(mContext.getString(R.string.wonders_open_after_pay));
-                tvAfterPayState.setEnabled(false);
+                tv_afterpaystate.setText(mContext.getString(R.string.wonders_open_after_pay));
+                tv_afterpaystate.setEnabled(false);
             }
         }
 
