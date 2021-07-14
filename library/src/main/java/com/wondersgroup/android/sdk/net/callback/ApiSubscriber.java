@@ -76,11 +76,22 @@ public class ApiSubscriber<T, E> extends ResourceSubscriber<T> {
 
     @Override
     public void onError(Throwable t) {
-        String error = t.getMessage();
+//        String error = t.getMessage();
+//        if (!TextUtils.isEmpty(error)) {
+//            LogUtil.eLogging(TAG, error);
+//            if (mCallback != null) {
+//                mCallback.onFailed(error);
+//            }
+//        }
+        String error = t.toString();
         if (!TextUtils.isEmpty(error)) {
             LogUtil.eLogging(TAG, error);
             if (mCallback != null) {
                 mCallback.onFailed(error);
+            }
+        } else {
+            if (mCallback != null) {
+                mCallback.onFailed("未知错误");
             }
         }
     }

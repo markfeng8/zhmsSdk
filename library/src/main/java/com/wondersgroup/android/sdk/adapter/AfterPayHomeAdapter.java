@@ -296,6 +296,7 @@ public class AfterPayHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @SuppressLint("SetTextI18n")
         public void setData(AfterHeaderBean afterHeaderBean) {
             if (afterHeaderBean != null) {
+                LogUtil.i(TAG, afterHeaderBean.toString());
                 String name = afterHeaderBean.getName();
                 String idNum = afterHeaderBean.getIdNum();
                 String signingStatus = afterHeaderBean.getSigningStatus();
