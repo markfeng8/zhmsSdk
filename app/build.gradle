@@ -99,13 +99,9 @@ dependencies {
 
     implementation(name: 'PALiveDetect4.9.2', ext: 'aar')
     implementation(name: 'zj_essc_sdk-2.0.9', ext: 'aar')
-    implementation(name: 'alipaySdk-15.6.5-20190718211148', ext: 'aar')
+    implementation(name: 'alipaysdk-15.8.03.210428205839', ext: 'aar')
 //    implementation 'com.wondersgroup.android:WondersGroupSdk:0.1.22'
     implementation project(':library')
-}
-
-def getApkFullPath() {
-    return rootDir.getAbsolutePath() + "/app/build/outputs/apk/release/" + getApkName()
 }
 
 def getApkName() {
@@ -114,58 +110,6 @@ def getApkName() {
 
 static def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
-}
-
-def readProperties(key) {
-    File file = rootProject.file('local.properties')
-    if (file.exists()) {
-        InputStream inputStream = rootProject.file('local.properties').newDataInputStream()
-        Properties properties = new Properties()
-        properties.load(inputStream)
-
-        if (properties.containsKey(key)) {
-            return properties.getProperty(key)
-        }
-    }
-}
-
-task("uploadApk") {
-    doLast {
-        //def command = "curl -F \"file=@${getApkFullPath()}\" -F \"uKey=${readProperties('pgyer.userKey')}\" -F \"_api_key=${readProperties('pgyer.apiKey')}\" -F \"buildUpdateDescription=${getUpdateDescription()}\" https://www.pgyer.com/apiv2/app/upload"
-        def command = "curl -F \"file=@${getApkFullPath()}\" -F \"_api_key=${readProperties('pgyer.apiKey')}\" -F \"buildInstallType=4\" -F \"buildInstallQuestoin=1+1=?\" -F \"buildInstallAnswer=2\" -F \"buildUpdateDescription=${getUpdateDescription()}\" https://www.pgyer.com/apiv2/app/upload"
-        exeCommand(command)
-    }
-}
-
-uploadApk.dependsOn("assembleRelease")
-
-task("installApk") {
-    doLast {
-        def command = "adb install -r ${getApkFullPath()}"
-        exeCommand(command)
-    }
-}
-
-task("launchApp") {
-    doLast {
-        def command = "adb shell am start ${android.defaultConfig.applicationId}/.MainActivity"
-        exeCommand(command)
-    }
-}
-
-//launchApp.dependsOn("installApk")
-
-def exeCommand(command) {
-    println "command:" + command
-
-    try {
-        exec {
-            ExecSpec execSpec -> executable 'bash' args '-c', command
-        }
-        println "command execute success~"
-    } catch (Exception e) {
-        e.printStackTrace()
-    }
 }
 
 /*
