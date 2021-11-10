@@ -25,11 +25,15 @@
 
 * 医后付温馨提示内容修改
 
-### v1.1.5
+### v1.1.6
 
 > 2021.8.19
 
-* 医后付温馨提示内容二次修改
+### v1.1.7
+
+> 2021.11.10
+
+* 万达支付SDK升级
 
 ## 二、集成步骤
 
@@ -49,18 +53,18 @@ allprojects {
 在app目录下的bulid.gradle文件 的 dependencies 闭包中添加sdk依赖
 ```
 dependencies {
-implementation ' implementation 'com.github.markfeng8:zhmsSdk:1.1.5''
+implementation ' implementation 'com.github.markfeng8:zhmsSdk:1.1.7''
 }
 ```
 ### 2
-将提供的 PALiveDetect4.9.2.aar、alipaySdk-15.6.5-20190718211148.aar和 zj_essc_sdk-2.0.9.aar 3个 aar 包放入 app 的libs文件夹内。
+将提供的 PALiveDetect4.9.2.aar、alipaysdk-15.8.03.210428205839.aar和 zj_essc_sdk-2.0.9.aar 3个 aar 包放入 app 的libs文件夹内。
 
 ### 3
 在 app 的 build.gradle 文件 的 dependencies 闭包中添加如下依赖：
 ```
     implementation(name: 'PALiveDetect4.9.2', ext: 'aar')
     implementation(name: 'zj_essc_sdk-2.0.9', ext: 'aar')
-    implementation(name: 'alipaySdk-15.6.5-20190718211148', ext: 'aar')
+    implementation(name: 'alipaysdk-15.8.03.210428205839', ext: 'aar')
 ```
 
 ### 4
@@ -115,6 +119,9 @@ WondersSdk.getInstance().init(this, option);
      * @param flag 业务标志 0 医后付 1 自费卡 2 住院
      *             注：flag 为 0 和 2 时 cardType 一定传 0(社保卡)，
      *             flag 为 1 时 cardType 传 2(自费卡)
+     *             cardType为0(社保卡)，就诊卡号可不传
+     *             cardType为1(自费卡)，就诊卡号如果没有卡号默认值000000000
+     *             phone 手机号可不传
      */
     private void startBusiness(int flag) {
         String name = etName.getText().toString().trim();
