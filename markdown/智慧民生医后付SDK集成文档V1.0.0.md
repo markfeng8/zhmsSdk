@@ -1,9 +1,9 @@
-# 智慧民生医后付SDK集成文档v1.0.0
+# 智慧民生医后付SDK集成文档v1.1.7
 
->**名称：** 智慧民生医后付SDK集成文档V1.0.0  
- **版本：** V1.1.3
+>**名称：** 智慧民生医后付SDK集成文档V1.1.7
+ **版本：** V1.1.7
  **作者：** 冯传田
- **更新日期：** 2021.7.16
+ **更新日期：** 2021.11.10
 
 ## 一、版本记录
 
@@ -31,7 +31,7 @@
 
 ### v1.1.7
 
-> 2021.11.10
+> 2021.11.11
 
 * 万达支付SDK升级
 
@@ -53,7 +53,7 @@ allprojects {
 在app目录下的bulid.gradle文件 的 dependencies 闭包中添加sdk依赖
 ```
 dependencies {
-implementation ' implementation 'com.github.markfeng8:zhmsSdk:1.1.7''
+implementation ' implementation 'com.github.markfeng8:zhmsSdk:1.1.7.02'
 }
 ```
 ### 2
@@ -405,7 +405,7 @@ SDK内部需要外部载体的参数通过接口实现的方法传入参数。
      -keep class vi.com.** {*;}
      -dontwarn com.baidu.**
     # 支付宝
-    -libraryjars libs/alipaySdk-15.6.5-20190718211148.aar
+    -libraryjars libs/alipaysdk-15.8.03.210428205839.aar
     -keep class com.alipay.android.app.IAlixPay{*;}
     -keep class com.alipay.android.app.IAlixPay$Stub{*;}
     -keep class com.alipay.android.app.IRemoteServiceCallback{*;}
