@@ -1,9 +1,9 @@
-# 智慧民生医后付SDK集成文档v1.1.7
+# 智慧民生医后付SDK集成文档v1.1.9
 
->**名称：** 智慧民生医后付SDK集成文档V1.1.7
- **版本：** V1.1.7
+>**名称：** 智慧民生医后付SDK集成文档V1.1.9
+ **版本：** V1.1.9
  **作者：** 冯传田
- **更新日期：** 2021.11.10
+ **更新日期：** 2021.12.23
 
 ## 一、版本记录
 
@@ -35,6 +35,12 @@
 
 * 万达支付SDK升级
 
+### v1.1.9
+
+> 2021.12.23
+
+* 医后付温馨提示内容修改
+
 ## 二、集成步骤
 
 ### 1
@@ -53,7 +59,7 @@ allprojects {
 在app目录下的bulid.gradle文件 的 dependencies 闭包中添加sdk依赖
 ```
 dependencies {
-implementation ' implementation 'com.github.markfeng8:zhmsSdk:1.1.7.02'
+implementation ' implementation 'com.github.markfeng8:zhmsSdk:1.1.9'
 }
 ```
 ### 2
